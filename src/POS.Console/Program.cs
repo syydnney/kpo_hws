@@ -1,0 +1,23 @@
+using POS.ConsoleAppHost;
+using Microsoft.Extensions.DependencyInjection;
+using POS.Application.Ports;
+using POS.Application.Services;
+using POS.Domain.Factories;
+using POS.Domain.Scoring;
+using POS.Infrastructure.Export;
+using POS.Infrastructure.Repositories;
+
+var services = new ServiceCollection();
+services.AddSingleton<IStudentRepository, InMemoryStudentRepository>();
+services.AddSingleton<IRubricRepository, InMemoryRubricRepository>();
+services.AddSingleton<IGradebookRepository, InMemoryGradebookRepository>();
+services.AddSingleton<IResultExporter, CsvResultExporter>();
+services.AddSingleton<EvaluationFactory>();
+services.AddSingleton<FinalScoreCalculator>();
+services.AddSingleton<CatalogService>();
+services.AddSingleton<GradingService>();
+services.AddSingleton<ReportingService>();
+services.AddSingleton<PosFacade>();
+services.AddSingleton<ConsoleApp>();
+using var provider = services.BuildServiceProvider();
+provider.GetRequiredService<ConsoleApp>().Run();

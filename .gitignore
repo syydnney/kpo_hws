@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+**/TestResults/
+coverage-report/
+.vs/
+.idea/
+*.user
+*.suo
